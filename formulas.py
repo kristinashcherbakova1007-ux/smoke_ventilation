@@ -2923,7 +2923,7 @@ def calculate_scenario_4(nu_a, t_a, k_alpha_ww, k_alpha_w0, t_r,
 def create_floors_data(N, **kwargs):
     
     floors_data = []
-    for i in range(2, N + 1):
+    for i in range(3, N + 1):
         floor_data = {
             'h': kwargs.get(f'h_{i}', 0),
             'D': kwargs.get(f'D_{i}', 0),
@@ -3063,7 +3063,7 @@ def calculate_scenario_5(nu_a, t_a, k_alpha_ww, k_alpha_w0, t_r,
             S_da_dsm_i_new = S_da_dsm_i
 
         # Утечки воздуха через неплотности дверного проема лестничной клетки на уровне i-го этажа, кг/с:
-        delta_G_sd_i = F_d_i * ((P_s_i + 9.8 * (h_i + 0.5 * h_d_i) * (rho_s - rho_r) - 0.25 * (k_alpha_ww - k_alpha_w0) * rho_a * nu_a ** 2) / S_da_dsm_i_new)**(1/2)
+        delta_G_sd_i = F_d_i * ((P_s_i + 9.8 * (h_i + 0.5 * h_d_i) * (rho_s - rho_r) - 0.25 * (k_alpha_ww - k_alpha_w0) * rho_a * nu_a ** 2) / S_da_dsm_i_new) ** (1/2)
 
         # Площадь оконного проема лестничной клетки на уровне i-го этажа, м^2:
         F_w_i = b_w_i * h_w_i
@@ -3234,10 +3234,10 @@ def calculate_scenario_6(nu_a, t_a, k_alpha_ww, k_alpha_w0, t_r,
 
     # Параметры для 3-го - N-го этажей:
     for i in range(3, N + 1):
-        if i - 2 >= len(floors_data):
+        if i - 3 >= len(floors_data):
             break
 
-        floor = floors_data[i - 2]
+        floor = floors_data[i - 3]
         h_i = floor['h']
         D_i = floor.get('D', 0)
         S_da_dsm_i = floor.get('S_da_dsm', 0)
@@ -3302,7 +3302,7 @@ def calculate_scenario_6(nu_a, t_a, k_alpha_ww, k_alpha_w0, t_r,
 def create_floors_data(N, **kwargs):
     
     floors_data = []
-    for i in range(2, N + 1):
+    for i in range(3, N + 1):
         floor_data = {
             'h': kwargs.get(f'h_{i}', 0),
             'D': kwargs.get(f'D_{i}', 0),
@@ -3402,10 +3402,10 @@ def calculate_scenario_7(t_a, t_r,
 
     # Параметры для 3-го - N-го этажей:
     for i in range(3, N + 1):
-        if i - 2 >= len(floors_data):
+        if i - 3 >= len(floors_data):
             break
 
-        floor = floors_data[i - 2]
+        floor = floors_data[i - 3]
         h_i = floor['h']
         D_i = floor.get('D', 0)
         S_da_dsm_i = floor.get('S_da_dsm', 0)
@@ -3470,7 +3470,7 @@ def calculate_scenario_7(t_a, t_r,
 def create_floors_data(N, **kwargs):
     
     floors_data = []
-    for i in range(2, N + 1):
+    for i in range(3, N + 1):
         floor_data = {
             'h': kwargs.get(f'h_{i}', 0),
             'D': kwargs.get(f'D_{i}', 0),
