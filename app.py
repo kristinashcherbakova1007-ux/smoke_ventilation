@@ -60,16 +60,16 @@ if scenario == 1:
 
         # Ввод параметров помещения
         st.subheader("1. Параметры помещения")
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=10, step=1)
-        A = st.number_input("Длина помещения, м", value=3.0, step=0.1)
-        B = st.number_input("Ширина помещения, м", value=3.0, step=0.1)
-        H = st.number_input("Высота помещения, м", value=2.5, step=0.1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=10.00, step=0.01)
+        A = st.number_input("Длина помещения, м", value=3.00, step=0.01)
+        B = st.number_input("Ширина помещения, м", value=3.00, step=0.01)
+        H = st.number_input("Высота помещения, м", value=2.50, step=0.01)
         AUPT = st.number_input("Система АУПТ (0 - отсутствует, 1 - скринклеры 3x3 , 2 - спринклеры 4x4)", value=0, step=1)
 
         # Ввод параметров пожарной нагрузки
         st.subheader("2. Параметры пожарной нагрузки")
         eta = st.number_input("Полнота сгорания пожарной нагрузки", value=0.85, step=0.01)
-        Q_average = st.number_input("Средняя теплота сгорания пожарной нагрузки, кДж/кг", value=13800, step=1)
+        Q_average = st.number_input("Средняя теплота сгорания пожарной нагрузки, кДж/кг", value=13800.00, step=0.01)
         U_average = st.number_input("Линейная скорость распространения пламени по поверхности пожарной нагрузки, м/с", value=0.0108, step=0.0001)
         psi_average = st.number_input("Средняя скорость потери массы пожарной нагрузки, кг/(м²·с)", value=0.0145, step=0.0001)
 
@@ -77,19 +77,19 @@ if scenario == 1:
 
         # Ввод параметров пожара
         st.subheader("3. Параметры пожара")
-        tau_f = st.number_input("Время развития очага пожара (600 с - город, 1200 с - за городом), с", value=600, step=1)
+        tau_f = st.number_input("Время развития очага пожара (600 с - город, 1200 с - за городом), с", value=600.00, step=0.01)
         r = st.number_input("Коэффициент, характеризующий теплопотери на излучение", value=0.70, step=0.01)
-        z = st.number_input("Высота незадымляемой зоны, м", value=2.5, step=0.1)
+        z = st.number_input("Высота незадымляемой зоны, м", value=2.50, step=0.01)
 
         # Ввод параметров компенсирующей подачи воздуха
         st.subheader("4. Параметры компенсирующей подачи воздуха")
-        n = st.number_input("Коэффициент дисбаланса", value=-0.3, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        n = st.number_input("Коэффициент дисбаланса", value=-0.30, step=0.10)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         R_a = st.number_input("Эквивалентное сопротивление воздухоприточного канала, кг⁻¹·м⁻¹", value=0.01, step=0.01)
 
         # Ввод параметров вентилятора
         st.subheader("5. Параметры вентилятора")
-        P_d = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=50, step=1)
+        P_d = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=50.00, step=0.01)
         
     # Ввод параметров начального участка вытяжного канала
     st.subheader("6. Параметры начального участка вытяжного канала")
@@ -126,7 +126,7 @@ if scenario == 1:
         'R_int': [0.00],
         'epsilon_l_int': [1.00],
         'delta_h_2_int': [0.0010],
-        'delta_h_3_int': [0.0100],
+        'delta_h_3_int': [0.010],
         'lambda_1_int': [52.00],
         'lambda_2_int': [0.030]
     }, index=['Значение'])
@@ -142,9 +142,9 @@ if scenario == 1:
             'R_int': st.column_config.NumberColumn("R'_0, м", format="%.2f"),
             'epsilon_l_int': st.column_config.NumberColumn("ε'_l0", format="%.2f"),
             'delta_h_2_int': st.column_config.NumberColumn("Δh'_20, м", format="%.4f"),
-            'delta_h_3_int': st.column_config.NumberColumn("Δh'_30, м", format="%.4f"),
+            'delta_h_3_int': st.column_config.NumberColumn("Δh'_30, м", format="%.3f"),
             'lambda_1_int': st.column_config.NumberColumn("λ'_10, Вт/(м·К)", format="%.2f"),
-            'lambda_2_int': st.column_config.NumberColumn("λ'_20, Вт/(м·К)", format="%.4f")
+            'lambda_2_int': st.column_config.NumberColumn("λ'_20, Вт/(м·К)", format="%.3f")
         },
         num_rows="fixed"
     )
@@ -172,20 +172,20 @@ if scenario == 1:
     N = st.number_input("Количество участков вертикального коллектора", value=10, step=1)
     # Создаем редактируемую таблицу
     collector_data = pd.DataFrame({
-        'A': [0.5]*N,
-        'B': [0.5]*N,
-        'l': [2.5]*N,
-        'xi': [0.0]*N,
-        'k': [0.1]*N,
-        'A_dp': [0.5]*N,
-        'B_dp': [0.5]*N,
+        'A': [0.50]*N,
+        'B': [0.50]*N,
+        'l': [2.50]*N,
+        'xi': [0.00]*N,
+        'k': [0.10]*N,
+        'A_dp': [0.50]*N,
+        'B_dp': [0.50]*N,
         'F_dp': [0.2025]*N,
-        'R': [0.0]*N,
-        'epsilon_l': [1.0]*N,
-        'delta_h_2': [0.001]*N,
-        'delta_h_3': [0.01]*N,
-        'lambda_1': [52.0]*N,
-        'lambda_2': [0.03]*N
+        'R': [0.00]*N,
+        'epsilon_l': [1.00]*N,
+        'delta_h_2': [0.0010]*N,
+        'delta_h_3': [0.010]*N,
+        'lambda_1': [52.00]*N,
+        'lambda_2': [0.030]*N
     }, index=[f'Участок {i}' for i in range(1, N+1)])
 
     columns = {
@@ -200,9 +200,9 @@ if scenario == 1:
         'R': st.column_config.NumberColumn("R, м", format="%.2f"),
         'epsilon_l': st.column_config.NumberColumn("ε_l", format="%.2f"),
         'delta_h_2': st.column_config.NumberColumn("Δh_2, м", format="%.4f"),
-        'delta_h_3': st.column_config.NumberColumn("Δh_3, м", format="%.4f"),
+        'delta_h_3': st.column_config.NumberColumn("Δh_3, м", format="%.3f"),
         'lambda_1': st.column_config.NumberColumn("λ_1, Вт/(м·К)", format="%.2f"),
-        'lambda_2': st.column_config.NumberColumn("λ_2, Вт/(м·К)", format="%.2f")
+        'lambda_2': st.column_config.NumberColumn("λ_2, Вт/(м·К)", format="%.3f")
     }
 
     edited_collector = st.data_editor(
@@ -448,7 +448,6 @@ if scenario == 1:
                     disabled=True,
                     format="%.2f"
                 )
-
                 st.number_input(
                     label="Объемный расход подаваемого воздуха, м³/ч",
                     value=formatted_results.get('L_a', 0.0),
@@ -637,8 +636,7 @@ if scenario == 1:
                     temp_df['Температура, К'],
                     marker='o',
                     color='red',
-                    linestyle='-',
-                    label='Температурный профиль'
+                    linestyle='-'
                 )
 
                 # Оформление (остается прежним)
@@ -652,7 +650,7 @@ if scenario == 1:
                 st.pyplot(fig)
 
             # График зависимости давления
-            st.subheader("Зависимость давления от участка вытяжного канала")
+            st.subheader("Зависимость давления газа от участка вытяжного канала")
 
             # Создаем словарь для данных графика
             pressure_data = {
@@ -683,13 +681,12 @@ if scenario == 1:
                     pressure_df['Давление, Па'],
                     marker='o',
                     color='green',
-                    linestyle='-',
-                    label='Профиль давления'
+                    linestyle='-'
                 )
     
                 # Оформляем график
                 plt.xticks(rotation=45)
-                ax.set_title('Зависимость давления от участка вытяжного канала')
+                ax.set_title('Зависимость давления газа от участка вытяжного канала')
                 ax.set_xlabel('Участок вытяжного канала')
                 ax.set_ylabel('Давление, Па')
                 ax.grid(True)
@@ -703,7 +700,7 @@ if scenario == 1:
                 st.pyplot(fig)
 
             # График зависимости массового расхода
-            st.subheader("Зависимость массового расхода продуктов горения от участка вытяжного канала")
+            st.subheader("Зависимость массового расхода газа от участка вытяжного канала")
 
             # Создаем словарь для данных графика
             mass_flow_data = {
@@ -732,13 +729,12 @@ if scenario == 1:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
                 plt.xticks(rotation=45)
-                ax.set_title('Зависимость массового расхода от участка вытяжного канала')
+                ax.set_title('Зависимость массового расхода газа от участка вытяжного канала')
                 ax.set_xlabel('Участок вытяжного канала')
                 ax.set_ylabel('Массовый расход, кг/с')
                 ax.grid(True)
@@ -764,49 +760,49 @@ if scenario == 2:
     st.text("- из холлов;")
     st.text("- из одноуровневых вестибюлей.")
 
+    # Ввод параметров помещения
+    st.subheader("1. Параметры помещения")
     col1, col2 = st.columns(2)
-    
     with col1:
-        # Ввод параметров помещения
-        st.subheader("1. Параметры помещения")
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=20, step=1)
-        A = st.number_input("Длина помещения, м", value=3.0, step=0.1)
-        B = st.number_input("Ширина помещения, м", value=3.0, step=0.1)
-        H = st.number_input("Высота помещения, м", value=2.5, step=0.1)
-        b_01 = st.number_input("Ширина 1-го проема помещения, м", value=1.0, step=0.1)
-        h_01 = st.number_input("Высота 1-го проема помещения, м", value=2.0, step=0.1)
-        b_02 = st.number_input("Ширина 2-го проема помещения, м", value=0.0, step=0.1)
-        h_02 = st.number_input("Высота 2-го проема помещения, м", value=0.0, step=0.1)
-        b_03 = st.number_input("Ширина 3-го проема помещения, м", value=0.0, step=0.1)
-        h_03 = st.number_input("Высота 3-го проема помещения, м", value=0.0, step=0.1)
-        b_04 = st.number_input("Ширина 4-го проема помещения, м", value=0.0, step=0.1)
-        h_04 = st.number_input("Высота 4-го проема помещения, м", value=0.0, step=0.1)
-        b_05 = st.number_input("Ширина 5-го проема помещения, м", value=0.0, step=0.1)
-        h_05 = st.number_input("Высота 5-го проема помещения, м", value=0.0, step=0.1)
-        A_c = st.number_input("Длина смежного помещения, м", value=3.0, step=0.1)
-        B_c = st.number_input("Ширина смежного помещения, м", value=3.0, step=0.1)
-        H_c = st.number_input("Высота смежного помещения, м", value=2.5, step=0.1)
-        k_sm = st.number_input("Коэффициент (1,0 - для жилых зданий, 1,2 - для общественных зданий)", value=1.0, step=0.1)
-        B_d = st.number_input("Ширина двери при выходе из смежного помещения по путям эвакуации, м", value=1.0, step=0.1)
-        H_d = st.number_input("Высота двери при выходе из смежного помещения по путям эвакуации, м", value=2.0, step=0.1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=20.00, step=0.01)
+        A = st.number_input("Длина помещения, м", value=3.00, step=0.01)
+        B = st.number_input("Ширина помещения, м", value=3.00, step=0.01)
+        H = st.number_input("Высота помещения, м", value=2.50, step=0.01)
+        b_01 = st.number_input("Ширина 1-го проема помещения, м", value=1.00, step=0.01)
+        h_01 = st.number_input("Высота 1-го проема помещения, м", value=2.00, step=0.01)
+        b_02 = st.number_input("Ширина 2-го проема помещения, м", value=0.00, step=0.01)
+        h_02 = st.number_input("Высота 2-го проема помещения, м", value=0.00, step=0.01)
+        b_03 = st.number_input("Ширина 3-го проема помещения, м", value=0.00, step=0.01)
+        h_03 = st.number_input("Высота 3-го проема помещения, м", value=0.00, step=0.01)
+        b_04 = st.number_input("Ширина 4-го проема помещения, м", value=0.00, step=0.01)
+        h_04 = st.number_input("Высота 4-го проема помещения, м", value=0.00, step=0.01)
+        b_05 = st.number_input("Ширина 5-го проема помещения, м", value=0.00, step=0.01)
+        h_05 = st.number_input("Высота 5-го проема помещения, м", value=0.00, step=0.01)
+        A_c = st.number_input("Длина смежного помещения, м", value=3.00, step=0.01)
+        B_c = st.number_input("Ширина смежного помещения, м", value=3.00, step=0.01)
+        H_c = st.number_input("Высота смежного помещения, м", value=2.50, step=0.01)
 
     with col2:
+        k_sm = st.number_input("Коэффициент (1,0 - для жилых зданий, 1,2 - для общественных зданий)", value=1.00, step=0.01)
+        B_d = st.number_input("Ширина двери при выходе из смежного помещения по путям эвакуации, м", value=1.00, step=0.01)
+        H_d = st.number_input("Высота двери при выходе из смежного помещения по путям эвакуации, м", value=2.00, step=0.01)
+
         # Ввод параметров пожарной нагрузки
         st.subheader("2. Параметры пожарной нагрузки")
-        M = st.number_input("Масса пожарной нагрузки помещения, кг", value=50.0, step=0.1)
-        Q_average = st.number_input("Средняя теплота сгорания пожарной нагрузки, кДж/кг", value=13800, step=1)
+        M = st.number_input("Масса пожарной нагрузки помещения, кг", value=50.00, step=0.01)
+        Q_average = st.number_input("Средняя теплота сгорания пожарной нагрузки, кДж/кг", value=13800.00, step=0.01)
         U_average = st.number_input("Линейная скорость распространения пламени по поверхности пожарной нагрузки, м/с", value=0.0108, step=0.0001)
         psi_average = st.number_input("Средняя скорость потери массы пожарной нагрузки, кг/(м²·с)", value=0.0145, step=0.0001)
 
         # Ввод параметров компенсирующей подачи воздуха
         st.subheader("3. Параметры компенсирующей подачи воздуха")
-        n = st.number_input("Коэффициент дисбаланса", value=-0.3, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        n = st.number_input("Коэффициент дисбаланса", value=-0.30, step=0.10)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         R_a = st.number_input("Эквивалентное сопротивление воздухоприточного канала, кг⁻¹·м⁻¹", value=0.01, step=0.01)
 
         # Ввод параметров вентилятора
         st.subheader("4. Параметры вентилятора")
-        P_d = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=50, step=1)
+        P_d = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=50.00, step=0.01)
         
     # Ввод параметров начального участка вытяжного канала
     st.subheader("5. Параметры начального участка вытяжного канала")
@@ -843,7 +839,7 @@ if scenario == 2:
         'R_int': [0.00],
         'epsilon_l_int': [1.00],
         'delta_h_2_int': [0.0010],
-        'delta_h_3_int': [0.0100],
+        'delta_h_3_int': [0.010],
         'lambda_1_int': [52.00],
         'lambda_2_int': [0.030]
     }, index=['Значение'])
@@ -859,9 +855,9 @@ if scenario == 2:
             'R_int': st.column_config.NumberColumn("R'_0, м", format="%.2f"),
             'epsilon_l_int': st.column_config.NumberColumn("ε'_l0", format="%.2f"),
             'delta_h_2_int': st.column_config.NumberColumn("Δh'_20, м", format="%.4f"),
-            'delta_h_3_int': st.column_config.NumberColumn("Δh'_30, м", format="%.4f"),
+            'delta_h_3_int': st.column_config.NumberColumn("Δh'_30, м", format="%.3f"),
             'lambda_1_int': st.column_config.NumberColumn("λ'_10, Вт/(м·К)", format="%.2f"),
-            'lambda_2_int': st.column_config.NumberColumn("λ'_20, Вт/(м·К)", format="%.4f")
+            'lambda_2_int': st.column_config.NumberColumn("λ'_20, Вт/(м·К)", format="%.3f")
         },
         num_rows="fixed"
     )
@@ -889,20 +885,20 @@ if scenario == 2:
     N = st.number_input("Количество участков вертикального коллектора", value=10, step=1)
     # Создаем редактируемую таблицу
     collector_data = pd.DataFrame({
-        'A': [0.5]*N,
-        'B': [0.5]*N,
-        'l': [2.5]*N,
-        'xi': [0.0]*N,
-        'k': [0.1]*N,
-        'A_dp': [0.5]*N,
-        'B_dp': [0.5]*N,
+        'A': [0.50]*N,
+        'B': [0.50]*N,
+        'l': [2.50]*N,
+        'xi': [0.00]*N,
+        'k': [0.10]*N,
+        'A_dp': [0.50]*N,
+        'B_dp': [0.50]*N,
         'F_dp': [0.2025]*N,
-        'R': [0.0]*N,
-        'epsilon_l': [1.0]*N,
-        'delta_h_2': [0.001]*N,
-        'delta_h_3': [0.01]*N,
-        'lambda_1': [52.0]*N,
-        'lambda_2': [0.03]*N
+        'R': [0.00]*N,
+        'epsilon_l': [1.00]*N,
+        'delta_h_2': [0.0010]*N,
+        'delta_h_3': [0.010]*N,
+        'lambda_1': [52.00]*N,
+        'lambda_2': [0.030]*N
     }, index=[f'Участок {i}' for i in range(1, N+1)])
 
     columns = {
@@ -917,9 +913,9 @@ if scenario == 2:
         'R': st.column_config.NumberColumn("R, м", format="%.2f"),
         'epsilon_l': st.column_config.NumberColumn("ε_l", format="%.2f"),
         'delta_h_2': st.column_config.NumberColumn("Δh_2, м", format="%.4f"),
-        'delta_h_3': st.column_config.NumberColumn("Δh_3, м", format="%.4f"),
+        'delta_h_3': st.column_config.NumberColumn("Δh_3, м", format="%.3f"),
         'lambda_1': st.column_config.NumberColumn("λ_1, Вт/(м·К)", format="%.2f"),
-        'lambda_2': st.column_config.NumberColumn("λ_2, Вт/(м·К)", format="%.2f")
+        'lambda_2': st.column_config.NumberColumn("λ_2, Вт/(м·К)", format="%.3f")
     }
 
     edited_collector = st.data_editor(
@@ -1108,6 +1104,8 @@ if scenario == 2:
                     disabled=True,
                     format="%.2f"
                 )
+
+            with col2:
                 st.number_input(
                     label="Предельная толщина дымового слоя, м",
                     value=formatted_results.get('h_sm', 0.0),
@@ -1139,8 +1137,7 @@ if scenario == 2:
                     format="%.2f"
                 )
 
-            # Вывод параметров компенсирующей подачи воздуха
-            with col2:
+                # Вывод параметров компенсирующей подачи воздуха
                 st.subheader("2. Параметры компенсирующей подачи воздуха")
                 st.number_input(
                     label="Массовый расход подаваемого воздуха, кг/с",
@@ -1350,8 +1347,7 @@ if scenario == 2:
                     temp_df['Температура, К'],
                     marker='o',
                     color='red',
-                    linestyle='-',
-                    label='Температурный профиль'
+                    linestyle='-'
                 )
 
                 # Оформление (остается прежним)
@@ -1365,7 +1361,7 @@ if scenario == 2:
                 st.pyplot(fig)
 
             # График зависимости давления
-            st.subheader("Зависимость давления от участка вытяжного канала")
+            st.subheader("Зависимость давления газа от участка вытяжного канала")
 
             # Создаем словарь для данных графика
             pressure_data = {
@@ -1396,13 +1392,12 @@ if scenario == 2:
                     pressure_df['Давление, Па'],
                     marker='o',
                     color='green',
-                    linestyle='-',
-                    label='Профиль давления'
+                    linestyle='-'
                 )
     
                 # Оформляем график
                 plt.xticks(rotation=45)
-                ax.set_title('Зависимость давления от участка вытяжного канала')
+                ax.set_title('Зависимость давления газа от участка вытяжного канала')
                 ax.set_xlabel('Участок вытяжного канала')
                 ax.set_ylabel('Давление, Па')
                 ax.grid(True)
@@ -1416,7 +1411,7 @@ if scenario == 2:
                 st.pyplot(fig)
 
             # График зависимости массового расхода
-            st.subheader("Зависимость массового расхода продуктов горения от участка вытяжного канала")
+            st.subheader("Зависимость массового расхода газа от участка вытяжного канала")
 
             # Создаем словарь для данных графика
             mass_flow_data = {
@@ -1445,8 +1440,7 @@ if scenario == 2:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -1485,17 +1479,17 @@ if scenario == 3:
 
         # Ввод параметров воздуха
         st.subheader("1. Параметры воздуха")
-        nu_a = st.number_input("Скорость ветра, м/с", value=1.3, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        nu_a = st.number_input("Скорость ветра, м/с", value=1.30, step=0.01)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         k_alpha_ww = st.number_input("Аэродинамический коэффициент ветрового напора для наветренной стороны", value=0.50, step=0.01)
         k_alpha_w0 = st.number_input("Аэродинамический коэффициент ветрового напора для заветренной стороны", value=-0.60, step=0.01)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров наружного выхода лестничной клетки
         st.subheader("2. Параметры наружного выхода лестничной клетки")
         n = st.number_input("Количество последовательно расположенных дверей наружного выхода лестничной клетки", value=1, step=1)
         xi_d = st.number_input("Коэффициент местного сопротивления дверного проема наружного выхода лестничной клетки (ξ_d=2,44)", value=2.44, step=0.01)
-        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξr=0 - для прямого тамбура, ξr=0,99 - для прямоугольного тамбура, ξr=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
+        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξ_r=0 - для прямого тамбура, ξ_r=0,99 - для прямоугольного тамбура, ξ_r=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
         b_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=1.00, step=0.01)
         h_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=2.00, step=0.01)
 
@@ -1504,8 +1498,8 @@ if scenario == 3:
         # Ввод параметров лестничной клетки
         st.subheader("3. Параметры лестничной клетки")
         z = st.number_input("Коэффициент сопротивления маршей лестничной клетки", value=1.00, step=0.01)
-        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60, step=1)
-        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10, step=1)
+        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60.00, step=0.01)
+        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10.00, step=0.01)
 
         # Ввод параметров пожара
         st.subheader("4. Параметры пожара")
@@ -1514,12 +1508,12 @@ if scenario == 3:
 
         # Ввод параметров 2-го этажа
         st.subheader("5. Параметры 2-го этажа")
-        h_2 = st.number_input("Уровень отметки пола 2-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
+        h_2 = st.number_input("Уровень отметки пола 2-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
         h_d_2 = st.number_input("Высота дверного проема лестничной клетки на уровне 2-го этаже, м", value=2.00, step=0.01)
 
         # Ввод параметров вентилятора
         st.subheader("6. Параметры вентилятора")
-        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_s_N = st.number_input("Высота лестничной клетки между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_s_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лестничной клетки, м", value=0.50, step=0.01)
 
@@ -1528,11 +1522,11 @@ if scenario == 3:
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [5.0] * (N-2),
-        'D': [0] * (N-2),
-        'S_da_dsm': [0.0] * (N-2),
-        'b_d': [1.0] * (N-2),
-        'h_d': [2.0] * (N-2),
+        'h': [5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'D': [0.00] * (N-2),
+        'S_da_dsm': [0.00] * (N-2),
+        'b_d': [1.00] * (N-2),
+        'h_d': [2.00] * (N-2),
         'R_n': [0.12] * (N-2),
         'b_w': [0.50] * (N-2),
         'h_w': [0.50] * (N-2)
@@ -1540,8 +1534,8 @@ if scenario == 3:
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'D': st.column_config.NumberColumn("D", format="%.0f"),
-        'S_da_dsm': st.column_config.NumberColumn("S_da_dsm, м³/кг", format="%.2f"),
+        'D': st.column_config.NumberColumn("D", format="%.2f"),
+        'S_da_dsm': st.column_config.NumberColumn("S_da/dsm, м³/кг", format="%.2f"),
         'b_d': st.column_config.NumberColumn("b_d, м", format="%.2f"),
         'h_d': st.column_config.NumberColumn("h_d, м", format="%.2f"),
         'R_n': st.column_config.NumberColumn("R_n, м", format="%.2f"),
@@ -1723,7 +1717,7 @@ if scenario == 3:
                     row_data = {
                         'P_s, Па': results.get(f'P_s_{i}', 0),
                         'F_d, м²': results.get(f'F_d_{i}', 0),
-                        'S_da_dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
+                        'S_da/dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
                         'ΔG_sd, кг/с': results.get(f'delta_G_sd_{i}', 0),
                         'F_w, м²': results.get(f'F_w_{i}', 0),
                         'k_z': results.get(f'k_z_{i}', 0),
@@ -1787,8 +1781,7 @@ if scenario == 3:
                     pressure_df['Давление, Па'],
                     marker='o',
                     color='green',
-                    linestyle='-',
-                    label='Профиль давления'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -1828,8 +1821,7 @@ if scenario == 3:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -1868,17 +1860,17 @@ if scenario == 4:
 
         # Ввод параметров воздуха
         st.subheader("1. Параметры воздуха")
-        nu_a = st.number_input("Скорость ветра, м/с", value=1.3, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        nu_a = st.number_input("Скорость ветра, м/с", value=1.30, step=0.01)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         k_alpha_ww = st.number_input("Аэродинамический коэффициент ветрового напора для наветренной стороны", value=0.50, step=0.01)
         k_alpha_w0 = st.number_input("Аэродинамический коэффициент ветрового напора для заветренной стороны", value=-0.60, step=0.01)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров наружного выхода лестничной клетки
         st.subheader("2. Параметры наружного выхода лестничной клетки")
         n = st.number_input("Количество последовательно расположенных дверей наружного выхода лестничной клетки", value=1, step=1)
         xi_d = st.number_input("Коэффициент местного сопротивления дверного проема наружного выхода лестничной клетки (ξ_d=2,44)", value=2.44, step=0.01)
-        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξr=0 - для прямого тамбура, ξr=0,99 - для прямоугольного тамбура, ξr=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
+        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξ_r=0 - для прямого тамбура, ξ_r=0,99 - для прямоугольного тамбура, ξ_r=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
         b_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=1.00, step=0.01)
         h_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=2.00, step=0.01)
 
@@ -1887,17 +1879,17 @@ if scenario == 4:
         # Ввод параметров лестничной клетки
         st.subheader("3. Параметры лестничной клетки")
         z = st.number_input("Коэффициент сопротивления маршей лестничной клетки", value=1.00, step=0.01)
-        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60, step=1)
-        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10, step=1) 
+        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60.00, step=0.01)
+        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10.00, step=0.01) 
 
         # Ввод параметров 2-го этажа
         st.subheader("4. Параметры 2-го этажа")
-        h_2 = st.number_input("Уровень отметки пола 2-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
+        h_2 = st.number_input("Уровень отметки пола 2-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
         h_d_2 = st.number_input("Высота дверного проема лестничной клетки на уровне 2-го этажа, м", value=2.00, step=0.01)
 
         # Ввод параметров вентилятора
         st.subheader("5. Параметры вентилятора")
-        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_s_N = st.number_input("Высота лестничной клетки между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_s_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лестничной клетки, м", value=0.50, step=0.01)
 
@@ -1906,11 +1898,11 @@ if scenario == 4:
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [5.0] * (N-2),
-        'D': [0] * (N-2),
-        'S_da_dsm': [0.0] * (N-2),
-        'b_d': [1.0] * (N-2),
-        'h_d': [2.0] * (N-2),
+        'h': [5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'D': [0.00] * (N-2),
+        'S_da_dsm': [0.00] * (N-2),
+        'b_d': [1.00] * (N-2),
+        'h_d': [2.00] * (N-2),
         'R_n': [0.12] * (N-2),
         'b_w': [0.50] * (N-2),
         'h_w': [0.50] * (N-2)
@@ -1918,8 +1910,8 @@ if scenario == 4:
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'D': st.column_config.NumberColumn("D", format="%.0f"),
-        'S_da_dsm': st.column_config.NumberColumn("S_da_dsm, м³/кг", format="%.2f"),
+        'D': st.column_config.NumberColumn("D", format="%.2f"),
+        'S_da_dsm': st.column_config.NumberColumn("S_da/dsm, м³/кг", format="%.2f"),
         'b_d': st.column_config.NumberColumn("b_d, м", format="%.2f"),
         'h_d': st.column_config.NumberColumn("h_d, м", format="%.2f"),
         'R_n': st.column_config.NumberColumn("R_n, м", format="%.2f"),
@@ -2091,7 +2083,7 @@ if scenario == 4:
                     row_data = {
                         'P_s, Па': results.get(f'P_s_{i}', 0),
                         'F_d, м²': results.get(f'F_d_{i}', 0),
-                        'S_da_dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
+                        'S_da/dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
                         'ΔG_sd, кг/с': results.get(f'delta_G_sd_{i}', 0),
                         'F_w, м²': results.get(f'F_w_{i}', 0),
                         'k_z': results.get(f'k_z_{i}', 0),
@@ -2155,8 +2147,7 @@ if scenario == 4:
                     pressure_df['Давление, Па'],
                     marker='o',
                     color='green',
-                    linestyle='-',
-                    label='Профиль давления'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -2196,8 +2187,7 @@ if scenario == 4:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -2236,17 +2226,17 @@ if scenario == 5:
 
         # Ввод параметров воздуха
         st.subheader("1. Параметры воздуха")
-        nu_a = st.number_input("Скорость ветра, м/с", value=1.3, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        nu_a = st.number_input("Скорость ветра, м/с", value=1.30, step=0.01)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=1.00)
         k_alpha_ww = st.number_input("Аэродинамический коэффициент ветрового напора для наветренной стороны", value=0.50, step=0.01)
         k_alpha_w0 = st.number_input("Аэродинамический коэффициент ветрового напора для заветренной стороны", value=-0.60, step=0.01)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров наружного выхода лестничной клетки
         st.subheader("2. Параметры наружного выхода лестничной клетки")
         n = st.number_input("Количество последовательно расположенных дверей наружного выхода лестничной клетки", value=1, step=1)
         xi_d = st.number_input("Коэффициент местного сопротивления дверного проема наружного выхода лестничной клетки (ξ_d=2,44)", value=2.44, step=0.01)
-        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξr=0 - для прямого тамбура, ξr=0,99 - для прямоугольного тамбура, ξr=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
+        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξ_r=0 - для прямого тамбура, ξ_r=0,99 - для прямоугольного тамбура, ξ_r=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
         b_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=1.00, step=0.01)
         h_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=2.00, step=0.01)
 
@@ -2255,8 +2245,8 @@ if scenario == 5:
         # Ввод параметров лестничной клетки
         st.subheader("3. Параметры лестничной клетки")
         z = st.number_input("Коэффициент сопротивления маршей лестничной клетки", value=1.00, step=0.01)
-        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60, step=1)
-        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10, step=1)
+        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60.00, step=0.01)
+        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10.00, step=0.01)
 
         # Ввод параметров пожара
         st.subheader("4. Параметры пожара")
@@ -2269,7 +2259,7 @@ if scenario == 5:
 
         # Ввод параметров вентилятора
         st.subheader("6. Параметры вентилятора")
-        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_s_N = st.number_input("Высота лестничной клетки между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_s_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лестничной клетки, м", value=0.50, step=0.01)
 
@@ -2278,11 +2268,11 @@ if scenario == 5:
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [2.5] * (N-1),
-        'D': [0] * (N-1),
-        'S_da_dsm': [0.0] * (N-1),
-        'b_d': [1.0] * (N-1),
-        'h_d': [2.0] * (N-1),
+        'h': [2.50, 5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'D': [0.00] * (N-1),
+        'S_da_dsm': [0.00] * (N-1),
+        'b_d': [1.00] * (N-1),
+        'h_d': [2.00] * (N-1),
         'R_n': [0.12] * (N-1),
         'b_w': [0.50] * (N-1),
         'h_w': [0.50] * (N-1)
@@ -2290,8 +2280,8 @@ if scenario == 5:
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'D': st.column_config.NumberColumn("D", format="%.0f"),
-        'S_da_dsm': st.column_config.NumberColumn("S_da_dsm, м³/кг", format="%.2f"),
+        'D': st.column_config.NumberColumn("D", format="%.2f"),
+        'S_da_dsm': st.column_config.NumberColumn("S_da/dsm, м³/кг", format="%.2f"),
         'b_d': st.column_config.NumberColumn("b_d, м", format="%.2f"),
         'h_d': st.column_config.NumberColumn("h_d, м", format="%.2f"),
         'R_n': st.column_config.NumberColumn("R_n, м", format="%.2f"),
@@ -2472,7 +2462,7 @@ if scenario == 5:
                     row_data = {
                         'P_s, Па': results.get(f'P_s_{i}', 0),
                         'F_d, м²': results.get(f'F_d_{i}', 0),
-                        'S_da_dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
+                        'S_da/dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
                         'ΔG_sd, кг/с': results.get(f'delta_G_sd_{i}', 0),
                         'F_w, м²': results.get(f'F_w_{i}', 0),
                         'k_z': results.get(f'k_z_{i}', 0),
@@ -2536,8 +2526,7 @@ if scenario == 5:
                     pressure_df['Давление, Па'],
                     marker='o',
                     color='green',
-                    linestyle='-',
-                    label='Профиль давления'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -2577,8 +2566,7 @@ if scenario == 5:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -2617,17 +2605,17 @@ if scenario == 6:
 
         # Ввод параметров воздуха
         st.subheader("1. Параметры воздуха")
-        nu_a = st.number_input("Скорость ветра, м/с", value=1.0, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        nu_a = st.number_input("Скорость ветра, м/с", value=1.00, step=0.01)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         k_alpha_ww = st.number_input("Аэродинамический коэффициент ветрового напора для наветренной стороны", value=0.50, step=0.01)
         k_alpha_w0 = st.number_input("Аэродинамический коэффициент ветрового напора для заветренной стороны", value=-0.60, step=0.01)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров наружного выхода лестничной клетки
         st.subheader("2. Параметры наружного выхода лестничной клетки")
         n = st.number_input("Количество последовательно расположенных дверей наружного выхода лестничной клетки", value=1, step=1)
         xi_d = st.number_input("Коэффициент местного сопротивления дверного проема наружного выхода лестничной клетки (ξ_d=2,44)", value=2.44, step=0.01)
-        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξr=0 - для прямого тамбура, ξr=0,99 - для прямоугольного тамбура, ξr=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
+        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξ_r=0 - для прямого тамбура, ξ_r=0,99 - для прямоугольного тамбура, ξ_r=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
         b_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=1.00, step=0.01)
         h_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=2.00, step=0.01)
 
@@ -2636,8 +2624,8 @@ if scenario == 6:
         # Ввод параметров лестничной клетки
         st.subheader("3. Параметры лестничной клетки")
         z = st.number_input("Коэффициент сопротивления маршей лестничной клетки", value=1.00, step=0.01)
-        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60, step=1)
-        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10, step=1)
+        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60.00, step=0.01)
+        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10.00, step=0.01)
 
         # Ввод параметров пожара
         st.subheader("4. Параметры пожара")
@@ -2646,12 +2634,12 @@ if scenario == 6:
 
         # Ввод параметров 2-го этажа
         st.subheader("5. Параметры 2-го этажа")
-        h_2 = st.number_input("Уровень отметки пола 2-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
+        h_2 = st.number_input("Уровень отметки пола 2-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
         h_d_2 = st.number_input("Высота дверного проема лестничной клетки на уровне 2-го этаже, м", value=2.00, step=0.01)
 
         # Ввод параметров вентилятора
         st.subheader("6. Параметры вентилятора")
-        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_s_N = st.number_input("Высота лестничной клетки между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_s_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лестничной клетки, м", value=0.50, step=0.01)
 
@@ -2660,17 +2648,17 @@ if scenario == 6:
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [5.0] * (N-2),
-        'D': [0] * (N-2),
-        'S_da_dsm': [0.0] * (N-2),
-        'b_d': [1.0] * (N-2),
-        'h_d': [2.0] * (N-2)
+        'h': [5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'D': [0.00] * (N-2),
+        'S_da_dsm': [0.00] * (N-2),
+        'b_d': [1.00] * (N-2),
+        'h_d': [2.00] * (N-2)
     }, index=[f'Этаж {i}' for i in range(3, N+1)])
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'D': st.column_config.NumberColumn("D", format="%.0f"),
-        'S_da_dsm': st.column_config.NumberColumn("S_da_dsm, м³/кг", format="%.2f"),
+        'D': st.column_config.NumberColumn("D", format="%.2f"),
+        'S_da_dsm': st.column_config.NumberColumn("S_da/dsm, м³/кг", format="%.2f"),
         'b_d': st.column_config.NumberColumn("b_d, м", format="%.2f"),
         'h_d': st.column_config.NumberColumn("h_d, м", format="%.2f")
     }
@@ -2846,7 +2834,7 @@ if scenario == 6:
                     row_data = {
                         'P_s, Па': results.get(f'P_s_{i}', 0),
                         'F_d, м²': results.get(f'F_d_{i}', 0),
-                        'S_da_dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
+                        'S_da/dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
                         'ΔG_sd, кг/с': results.get(f'delta_G_sd_{i}', 0),
                         'ΔG_s, кг/с': results.get(f'delta_G_s_{i}', 0),
                         'G_s, кг/с': results.get(f'G_s_{i}', 0),
@@ -2907,8 +2895,7 @@ if scenario == 6:
                     pressure_df['Давление, Па'],
                     marker='o',
                     color='green',
-                    linestyle='-',
-                    label='Профиль давления'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -2948,8 +2935,7 @@ if scenario == 6:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -2987,13 +2973,13 @@ if scenario == 7:
     with col1:
         # Ввод параметров воздуха
         st.subheader("1. Параметры воздуха")
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров лестничной клетки
         st.subheader("3. Параметры лестничной клетки")
-        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60, step=1)
-        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10, step=1)
+        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60.00, step=0.01)
+        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10.00, step=0.01)
 
         # Ввод параметров пожара
         st.subheader("4. Параметры пожара")
@@ -3003,12 +2989,12 @@ if scenario == 7:
     with col2:
         # Ввод параметров 2-го этажа
         st.subheader("5. Параметры 2-го этажа")
-        h_2 = st.number_input("Уровень отметки пола 2-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
+        h_2 = st.number_input("Уровень отметки пола 2-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
         h_d_2 = st.number_input("Высота дверного проема лестничной клетки на уровне 2-го этаже, м", value=2.00, step=0.01)
 
         # Ввод параметров вентилятора
         st.subheader("6. Параметры вентилятора")
-        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=0.01, step=0.01)
         h_s_N = st.number_input("Высота лестничной клетки между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_s_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лестничной клетки, м", value=0.50, step=0.01)
 
@@ -3017,17 +3003,17 @@ if scenario == 7:
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [5.0] * (N-2),
-        'D': [0] * (N-2),
-        'S_da_dsm': [0.0] * (N-2),
-        'b_d': [1.0] * (N-2),
-        'h_d': [2.0] * (N-2)
+        'h': [5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'D': [0.00] * (N-2),
+        'S_da_dsm': [0.00] * (N-2),
+        'b_d': [1.00] * (N-2),
+        'h_d': [2.00] * (N-2)
     }, index=[f'Этаж {i}' for i in range(3, N+1)])
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'D': st.column_config.NumberColumn("D", format="%.0f"),
-        'S_da_dsm': st.column_config.NumberColumn("S_da_dsm, м³/кг", format="%.2f"),
+        'D': st.column_config.NumberColumn("D", format="%.2f"),
+        'S_da_dsm': st.column_config.NumberColumn("S_da/dsm, м³/кг", format="%.2f"),
         'b_d': st.column_config.NumberColumn("b_d, м", format="%.2f"),
         'h_d': st.column_config.NumberColumn("h_d, м", format="%.2f")
     }
@@ -3180,7 +3166,7 @@ if scenario == 7:
                     row_data = {
                         'P_s, Па': results.get(f'P_s_{i}', 0),
                         'F_d, м²': results.get(f'F_d_{i}', 0),
-                        'S_da_dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
+                        'S_da/dsm, м³/кг': results.get(f'S_da_dsm_{i}_new', 0),
                         'ΔG_sd, кг/с': results.get(f'delta_G_sd_{i}', 0),
                         'ΔG_s, кг/с': results.get(f'delta_G_s_{i}', 0),
                         'G_s, кг/с': results.get(f'G_s_{i}', 0),
@@ -3241,8 +3227,7 @@ if scenario == 7:
                     pressure_df['Давление, Па'],
                     marker='o',
                     color='green',
-                    linestyle='-',
-                    label='Профиль давления'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -3282,8 +3267,7 @@ if scenario == 7:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -3321,17 +3305,17 @@ if scenario == 8:
 
         # Ввод параметров воздуха
         st.subheader("1. Параметры воздуха")
-        nu_a = st.number_input("Скорость ветра, м/с", value=1.0, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        nu_a = st.number_input("Скорость ветра, м/с", value=1.00, step=0.01)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         k_alpha_ww = st.number_input("Аэродинамический коэффициент ветрового напора для наветренной стороны", value=0.50, step=0.01)
         k_alpha_w0 = st.number_input("Аэродинамический коэффициент ветрового напора для заветренной стороны", value=-0.60, step=0.01)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров наружного выхода лестничной клетки
         st.subheader("2. Параметры наружного выхода лестничной клетки")
         n = st.number_input("Количество последовательно расположенных дверей наружного выхода лестничной клетки", value=1, step=1)
         xi_d = st.number_input("Коэффициент местного сопротивления дверного проема наружного выхода лестничной клетки (ξ_d=2,44)", value=2.44, step=0.01)
-        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξr=0 - для прямого тамбура, ξr=0,99 - для прямоугольного тамбура, ξr=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
+        xi_r = st.number_input("Коэффициент местного сопротивления тамбура наружного выхода лестничной клетки (ξ_r=0 - для прямого тамбура, ξ_r=0,99 - для прямоугольного тамбура, ξ_r=2,9...4,0 - для z-образного тамбура)", value=0.00, step=0.01)
         b_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=1.00, step=0.01)
         h_da = st.number_input("Ширина дверного проема наружного выхода лестничной клетки, м", value=2.00, step=0.01)
 
@@ -3340,8 +3324,8 @@ if scenario == 8:
         # Ввод параметров лестничной клетки
         st.subheader("3. Параметры лестничной клетки")
         z = st.number_input("Коэффициент сопротивления маршей лестничной клетки", value=1.00, step=0.01)
-        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60, step=1)
-        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10, step=1)  
+        xi_s = st.number_input("Коэффициент местного сопротивления лестничной клетки (ξ_s=60)", value=60.00, step=0.01)
+        F_s = st.number_input("Площадь горизонтальной проекции маршей и площадок лестничной клетки, м²", value=10.00, step=0.01)  
 
         # Ввод параметров пожара
         st.subheader("4. Параметры пожара")
@@ -3350,12 +3334,12 @@ if scenario == 8:
 
         # Ввод параметров (-1)-го этажа
         st.subheader("5. Параметры (-1)-го этажа")
-        h_minus_1 = st.number_input("Уровень отметки пола (-1)-го этажа относительно уровня отметки пола 1-го этажа, м", value=-2.5, step=0.1)
+        h_minus_1 = st.number_input("Уровень отметки пола (-1)-го этажа относительно уровня отметки пола 1-го этажа, м", value=-2.50, step=0.01)
         h_d_minus_1 = st.number_input("Высота дверного проема лестничной клетки на уровне (-1)-го этаже, м", value=2.00, step=0.01)
 
         # Ввод параметров вентилятора
         st.subheader("6. Параметры вентилятора")
-        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_ds = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_s_N = st.number_input("Высота лестничной клетки между уровнями нижнего и верхнего этажей, м", value=10.00, step=0.01)
         h_s_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лестничной клетки, м", value=0.50, step=0.01)
 
@@ -3366,17 +3350,17 @@ if scenario == 8:
 
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [-5.0] * (N-1),
-        'D': [0] * (N-1),
-        'S_da_dsm': [0.0] * (N-1),
-        'b_d': [1.0] * (N-1),
-        'h_d': [2.0] * (N-1)
+        'h': [-5.0, -7.50, -10.00, -12.50],
+        'D': [0.00] * (N-1),
+        'S_da_dsm': [0.00] * (N-1),
+        'b_d': [1.00] * (N-1),
+        'h_d': [2.00] * (N-1)
     }, index=[f'Этаж -{i}' for i in range(2, N+1)])
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'D': st.column_config.NumberColumn("D", format="%.0f"),
-        'S_da_dsm': st.column_config.NumberColumn("S_da_dsm, м³/кг", format="%.2f"),
+        'D': st.column_config.NumberColumn("D", format="%.2f"),
+        'S_da_dsm': st.column_config.NumberColumn("S_da/dsm, м³/кг", format="%.2f"),
         'b_d': st.column_config.NumberColumn("b_d, м", format="%.2f"),
         'h_d': st.column_config.NumberColumn("h_d, м", format="%.2f")
     }
@@ -3553,7 +3537,7 @@ if scenario == 8:
                     row_data = {
                         'P_s, Па': results.get(f'P_s_minus_{i}', 0),
                         'F_d, м²': results.get(f'F_d_minus_{i}', 0),
-                        'S_da_dsm, м³/кг': results.get(f'S_da_dsm_minus_{i}_new', 0),
+                        'S_da/dsm, м³/кг': results.get(f'S_da_dsm_minus_{i}_new', 0),
                         'ΔG_sd, кг/с': results.get(f'delta_G_sd_minus_{i}', 0),
                         'G_s, кг/с': results.get(f'G_s_minus_{i}', 0),
                         'ν_s, м/с': results.get(f'nu_s_minus_{i}', 0)
@@ -3613,8 +3597,7 @@ if scenario == 8:
                     pressure_df['Давление, Па'],
                     marker='o',
                     color='green',
-                    linestyle='-',
-                    label='Профиль давления'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -3654,8 +3637,7 @@ if scenario == 8:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -3688,57 +3670,55 @@ if scenario == 9:
     st.text("- имеет выгороженные лифтовые холлы на каждом этаже, кроме нижнего.")
 
 #---------------------------------------------------------------------
-
+    # Ввод параметров воздуха
+    st.subheader("1. Параметры воздуха")
     col1, col2 = st.columns(2)
     with col1:
-
-        # Ввод параметров воздуха
-        st.subheader("1. Параметры воздуха")
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров лифтовой шахты
         st.subheader("2. Параметры лифтовой шахты")
-        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.0, step=0.1)                
-        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.5, step=0.1)
+        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.00, step=0.01)                
+        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.50, step=0.01)
 
         # Ввод параметров 1-го этажа
         st.subheader("3. Параметры 1-го этажа")
         n_1 = st.number_input("Количество дверей лифтовой шахты на уровне 1-го этажа", value=1, step=1)
-        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.0, step=0.1)        
-        b_dl_1 = st.number_input("Ширина дверей лифтовой шахты на уровне 1-го этажа, м", value=1.00, step=0.01)
-        h_dl_1 = st.number_input("Высота дверей лифтовой шахты на уровне 1-го этажа, м", value=2.00, step=0.01)
+        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.00, step=0.01)        
 
     with col2:
         # Ввод параметров вентилятора
+        b_dl_1 = st.number_input("Ширина дверей лифтовой шахты на уровне 1-го этажа, м", value=1.00, step=0.01)
+        h_dl_1 = st.number_input("Высота дверей лифтовой шахты на уровне 1-го этажа, м", value=2.00, step=0.01)
         st.subheader("4. Параметры вентилятора")
-        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_l_N = st.number_input("Высота лифтовой шахты между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_l_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лифтовой шахты, м", value=0.50, step=0.01)
 
     # Ввод параметров 2-го-N-го этажей
-    st.subheader("4. Параметры 2-го-N-го этажей")
+    st.subheader("5. Параметры 2-го-N-го этажей")
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [2.5] * (N-1),
-        'S_dl': [0] * (N-1),
-        'n': [1.0] * (N-1),
-        'b_dl': [1.0] * (N-1),
-        'h_dl': [2.0] * (N-1),
-        'S_dr': [0] * (N-1),
-        'm': [1.0] * (N-1),
-        'b_dr': [1.0] * (N-1),
-        'h_dr': [2.0] * (N-1),
+        'h': [2.50, 5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'S_dl': [0.00] * (N-1),
+        'n': [1] * (N-1),
+        'b_dl': [1.00] * (N-1),
+        'h_dl': [2.00] * (N-1),
+        'S_dr': [0.00] * (N-1),
+        'm': [1] * (N-1),
+        'b_dr': [1.00] * (N-1),
+        'h_dr': [2.00] * (N-1),
     }, index=[f'Этаж {i}' for i in range(2, N+1)])
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.0f"),
+        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.2f"),
         'n': st.column_config.NumberColumn("n", format="%.0f"),
         'b_dl': st.column_config.NumberColumn("b_dl, м", format="%.2f"),
         'h_dl': st.column_config.NumberColumn("h_dl, м", format="%.2f"),
-        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.0f"),
+        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.2f"),
         'm': st.column_config.NumberColumn("m", format="%.0f"),
         'b_dr': st.column_config.NumberColumn("b_dr, м", format="%.2f"),
         'h_dr': st.column_config.NumberColumn("h_dr, м", format="%.2f")
@@ -3964,8 +3944,7 @@ if scenario == 9:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -3998,60 +3977,60 @@ if scenario == 10:
 
 #---------------------------------------------------------------------
 
+    # Ввод параметров воздуха
+    st.subheader("1. Параметры воздуха")
+
     col1, col2 = st.columns(2)
     with col1:
-
-        # Ввод параметров воздуха
-        st.subheader("1. Параметры воздуха")
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров лифтовой шахты
         st.subheader("2. Параметры лифтовой шахты")
-        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.0, step=0.1)                
-        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.5, step=0.1)
+        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.00, step=0.01)                
+        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.50, step=0.01)
 
         # Ввод параметров 1-го этажа
         st.subheader("3. Параметры 1-го этажа")
         n_1 = st.number_input("Количество дверей лифтовой шахты на уровне 1-го этажа", value=1, step=1)
-        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.0, step=0.1)        
+        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.00, step=0.01)        
         b_dl_1 = st.number_input("Ширина дверей лифтовой шахты на уровне 1-го этажа, м", value=1.00, step=0.01)
         h_dl_1 = st.number_input("Высота дверей лифтовой шахты на уровне 1-го этажа, м", value=2.00, step=0.01)
-        m_1 = st.number_input("Количество дверей лифтового холла на уровне 1-го этажа", value=1, step=1)
-        xi_d_1 = st.number_input("Коэффициент местного сопротивления дверей лифтового холла (ξd=2,44)", value=2.44, step=0.01)        
-        b_dr_1 = st.number_input("Ширина дверей лифтового холла на уровне 1-го этажа, м", value=1.00, step=0.01)
-        h_dr_1 = st.number_input("Высота дверей лифтового холла на уровне 1-го этажа, м", value=2.00, step=0.01)
 
     with col2:
+        m_1 = st.number_input("Количество дверей лифтового холла на уровне 1-го этажа", value=1, step=1)
+        xi_d_1 = st.number_input("Коэффициент местного сопротивления дверей лифтового холла (ξ_d=2,44)", value=2.44, step=0.01)        
+        b_dr_1 = st.number_input("Ширина дверей лифтового холла на уровне 1-го этажа, м", value=1.00, step=0.01)
+        h_dr_1 = st.number_input("Высота дверей лифтового холла на уровне 1-го этажа, м", value=2.00, step=0.01)
         # Ввод параметров вентилятора
         st.subheader("4. Параметры вентилятора")
-        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_l_N = st.number_input("Высота лифтовой шахты между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_l_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лифтовой шахты, м", value=0.50, step=0.01)
 
     # Ввод параметров 2-го-N-го этажей
-    st.subheader("4. Параметры 2-го-N-го этажей")
+    st.subheader("5. Параметры 2-го-N-го этажей")
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [2.5] * (N-1),
-        'S_dl': [0] * (N-1),
-        'n': [1.0] * (N-1),
-        'b_dl': [1.0] * (N-1),
-        'h_dl': [2.0] * (N-1),
-        'S_dr': [0] * (N-1),
-        'm': [1.0] * (N-1),
-        'b_dr': [1.0] * (N-1),
-        'h_dr': [2.0] * (N-1),
+        'h': [2.50, 5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'S_dl': [0.00] * (N-1),
+        'n': [1] * (N-1),
+        'b_dl': [1.00] * (N-1),
+        'h_dl': [2.00] * (N-1),
+        'S_dr': [0.00] * (N-1),
+        'm': [1] * (N-1),
+        'b_dr': [1.00] * (N-1),
+        'h_dr': [2.00] * (N-1),
     }, index=[f'Этаж {i}' for i in range(2, N+1)])
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.0f"),
+        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.2f"),
         'n': st.column_config.NumberColumn("n", format="%.0f"),
         'b_dl': st.column_config.NumberColumn("b_dl, м", format="%.2f"),
         'h_dl': st.column_config.NumberColumn("h_dl, м", format="%.2f"),
-        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.0f"),
+        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.2f"),
         'm': st.column_config.NumberColumn("m", format="%.0f"),
         'b_dr': st.column_config.NumberColumn("b_dr, м", format="%.2f"),
         'h_dr': st.column_config.NumberColumn("h_dr, м", format="%.2f")
@@ -4287,8 +4266,7 @@ if scenario == 10:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -4320,64 +4298,64 @@ if scenario == 11:
     st.text("- имеет выгороженные лифтовые холлы на каждом этаже.")
 
 #---------------------------------------------------------------------
+    # Ввод параметров воздуха
+    st.subheader("1. Параметры воздуха")
 
     col1, col2 = st.columns(2)
     with col1:
 
-        # Ввод параметров воздуха
-        st.subheader("1. Параметры воздуха")
-        nu_a = st.number_input("Скорость ветра, м/с", value=1.3, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        nu_a = st.number_input("Скорость ветра, м/с", value=1.30, step=0.1)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         k_alpha_ww = st.number_input("Аэродинамический коэффициент ветрового напора для наветренной стороны", value=0.50, step=0.01)
         k_alpha_w0 = st.number_input("Аэродинамический коэффициент ветрового напора для заветренной стороны", value=-0.60, step=0.01)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров лифтовой шахты
         st.subheader("2. Параметры лифтовой шахты")
-        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.0, step=0.1)                
-        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.5, step=0.1)
+        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.00, step=0.01)                
+        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.50, step=0.01)
 
         # Ввод параметров 1-го этажа
         st.subheader("3. Параметры 1-го этажа")
         n_1 = st.number_input("Количество дверей лифтовой шахты на уровне 1-го этажа", value=1, step=1)
-        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.0, step=0.1)        
+        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.00, step=0.01)        
+
+    with col2:
         b_dl_1 = st.number_input("Ширина дверей лифтовой шахты на уровне 1-го этажа, м", value=1.00, step=0.01)
         h_dl_1 = st.number_input("Высота дверей лифтовой шахты на уровне 1-го этажа, м", value=2.00, step=0.01)
         m_1 = st.number_input("Количество дверей лифтового холла на уровне 1-го этажа", value=1, step=1)
-        xi_d_1 = st.number_input("Коэффициент местного сопротивления дверей лифтового холла (ξd=2,44)", value=2.44, step=0.01)        
+        xi_d_1 = st.number_input("Коэффициент местного сопротивления дверей лифтового холла (ξ_d=2,44)", value=2.44, step=0.01)        
         b_dr_1 = st.number_input("Ширина дверей лифтового холла на уровне 1-го этажа, м", value=1.00, step=0.01)
         h_dr_1 = st.number_input("Высота дверей лифтового холла на уровне 1-го этажа, м", value=2.00, step=0.01)
-
-    with col2:
         # Ввод параметров вентилятора
         st.subheader("4. Параметры вентилятора")
-        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_l_N = st.number_input("Высота лифтовой шахты между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_l_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лифтовой шахты, м", value=0.50, step=0.01)
 
     # Ввод параметров 2-го-N-го этажей
-    st.subheader("4. Параметры 2-го-N-го этажей")
+    st.subheader("5. Параметры 2-го-N-го этажей")
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [2.5] * (N-1),
-        'S_dl': [0] * (N-1),
-        'n': [1.0] * (N-1),
-        'b_dl': [1.0] * (N-1),
-        'h_dl': [2.0] * (N-1),
-        'S_dr': [0] * (N-1),
-        'm': [1.0] * (N-1),
-        'b_dr': [1.0] * (N-1),
-        'h_dr': [2.0] * (N-1),
+        'h': [2.50, 5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'S_dl': [0.00] * (N-1),
+        'n': [1] * (N-1),
+        'b_dl': [1.00] * (N-1),
+        'h_dl': [2.00] * (N-1),
+        'S_dr': [0.00] * (N-1),
+        'm': [1] * (N-1),
+        'b_dr': [1.00] * (N-1),
+        'h_dr': [2.00] * (N-1),
     }, index=[f'Этаж {i}' for i in range(2, N+1)])
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.0f"),
+        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.2f"),
         'n': st.column_config.NumberColumn("n", format="%.0f"),
         'b_dl': st.column_config.NumberColumn("b_dl, м", format="%.2f"),
         'h_dl': st.column_config.NumberColumn("h_dl, м", format="%.2f"),
-        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.0f"),
+        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.2f"),
         'm': st.column_config.NumberColumn("m", format="%.0f"),
         'b_dr': st.column_config.NumberColumn("b_dr, м", format="%.2f"),
         'h_dr': st.column_config.NumberColumn("h_dr, м", format="%.2f")
@@ -4616,8 +4594,7 @@ if scenario == 11:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -4655,54 +4632,54 @@ if scenario == 12:
 
         # Ввод параметров воздуха
         st.subheader("1. Параметры воздуха")
-        nu_a = st.number_input("Скорость ветра, м/с", value=1.3, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        nu_a = st.number_input("Скорость ветра, м/с", value=1.30, step=0.01)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         k_alpha_ww = st.number_input("Аэродинамический коэффициент ветрового напора для наветренной стороны", value=0.50, step=0.01)
         k_alpha_w0 = st.number_input("Аэродинамический коэффициент ветрового напора для заветренной стороны", value=-0.60, step=0.01)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров лифтовой шахты
         st.subheader("2. Параметры лифтовой шахты")
-        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.0, step=0.1)                
-        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.5, step=0.1)
+        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.00, step=0.01)                
+        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.50, step=0.01)
 
+    with col2:
         # Ввод параметров 1-го этажа
         st.subheader("3. Параметры 1-го этажа")
         n_1 = st.number_input("Количество дверей лифтовой шахты на уровне 1-го этажа", value=1, step=1)
-        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.0, step=0.1)        
+        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.00, step=0.01)        
         b_dl_1 = st.number_input("Ширина дверей лифтовой шахты на уровне 1-го этажа, м", value=1.00, step=0.01)
         h_dl_1 = st.number_input("Высота дверей лифтовой шахты на уровне 1-го этажа, м", value=2.00, step=0.01)
-
-    with col2:
+        
         # Ввод параметров вентилятора
         st.subheader("4. Параметры вентилятора")
-        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_l_N = st.number_input("Высота лифтовой шахты между уровнями нижнего и верхнего этажей, м", value=22.50, step=0.01)
         h_l_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лифтовой шахты, м", value=0.50, step=0.01)
 
     # Ввод параметров 2-го-N-го этажей
-    st.subheader("4. Параметры 2-го-N-го этажей")
+    st.subheader("5. Параметры 2-го-N-го этажей")
     N = st.number_input("Количество этажей", value=10, step=1)
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [2.5] * (N-1),
-        'S_dl': [0] * (N-1),
-        'n': [1.0] * (N-1),
-        'b_dl': [1.0] * (N-1),
-        'h_dl': [2.0] * (N-1),
-        'S_dr': [0] * (N-1),
-        'm': [1.0] * (N-1),
-        'b_dr': [1.0] * (N-1),
-        'h_dr': [2.0] * (N-1),
+        'h': [2.50, 5.00, 7.50, 10.00, 12.50, 15.00, 17.50, 20.00, 22.50],
+        'S_dl': [0.00] * (N-1),
+        'n': [1] * (N-1),
+        'b_dl': [1.00] * (N-1),
+        'h_dl': [2.00] * (N-1),
+        'S_dr': [00] * (N-1),
+        'm': [1] * (N-1),
+        'b_dr': [1.00] * (N-1),
+        'h_dr': [2.00] * (N-1),
     }, index=[f'Этаж {i}' for i in range(2, N+1)])
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.0f"),
+        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.2f"),
         'n': st.column_config.NumberColumn("n", format="%.0f"),
         'b_dl': st.column_config.NumberColumn("b_dl, м", format="%.2f"),
         'h_dl': st.column_config.NumberColumn("h_dl, м", format="%.2f"),
-        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.0f"),
+        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.2f"),
         'm': st.column_config.NumberColumn("m", format="%.0f"),
         'b_dr': st.column_config.NumberColumn("b_dr, м", format="%.2f"),
         'h_dr': st.column_config.NumberColumn("h_dr, м", format="%.2f")
@@ -4931,8 +4908,7 @@ if scenario == 12:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -4965,66 +4941,67 @@ if scenario == 13:
 
 #---------------------------------------------------------------------
 
+    # Ввод параметров воздуха
+    st.subheader("1. Параметры воздуха")
+    
     col1, col2 = st.columns(2)
     with col1:
 
-        # Ввод параметров воздуха
-        st.subheader("1. Параметры воздуха")
-        nu_a = st.number_input("Скорость ветра, м/с", value=1.3, step=0.1)
-        t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+        nu_a = st.number_input("Скорость ветра, м/с", value=1.30, step=0.01)
+        t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
         k_alpha_ww = st.number_input("Аэродинамический коэффициент ветрового напора для наветренной стороны", value=0.50, step=0.01)
         k_alpha_w0 = st.number_input("Аэродинамический коэффициент ветрового напора для заветренной стороны", value=-0.60, step=0.01)
-        t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+        t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
         # Ввод параметров лифтовой шахты
         st.subheader("2. Параметры лифтовой шахты")
-        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.0, step=0.1)                
-        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.5, step=0.1)
+        F_lc = st.number_input("Площадь поперечного сечения кабины лифта, м²", value=1.00, step=0.01)                
+        F_ls = st.number_input("Площадь поперечного сечения лифтовой шахты, м²", value=1.50, step=0.01)
 
         # Ввод параметров 1-го этажа
         st.subheader("3. Параметры 1-го этажа")
         n_1 = st.number_input("Количество дверей лифтовой шахты на уровне 1-го этажа", value=1, step=1)
-        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.0, step=0.1)        
+        xi_l_1 = st.number_input("Коэффициент местного сопротивления узла «кабина-шахта» при открытых дверях кабины и шахты на уровне 1-го этажа (0 - нет данных)", value=0.00, step=0.01)        
+
+    with col2:
         b_dl_1 = st.number_input("Ширина дверей лифтовой шахты на уровне 1-го этажа, м", value=1.00, step=0.01)
         h_dl_1 = st.number_input("Высота дверей лифтовой шахты на уровне 1-го этажа, м", value=2.00, step=0.01)
         m_1 = st.number_input("Количество дверей лифтового холла на уровне 1-го этажа", value=1, step=1)
-        xi_d_1 = st.number_input("Коэффициент местного сопротивления дверей лифтового холла (ξd=2,44)", value=2.44, step=0.01)        
+        xi_d_1 = st.number_input("Коэффициент местного сопротивления дверей лифтового холла (ξ_d=2,44)", value=2.44, step=0.01)        
         b_dr_1 = st.number_input("Ширина дверей лифтового холла на уровне 1-го этажа, м", value=1.00, step=0.01)
         h_dr_1 = st.number_input("Высота дверей лифтового холла на уровне 1-го этажа, м", value=2.00, step=0.01)
-
-    with col2:
         # Ввод параметров вентилятора
         st.subheader("4. Параметры вентилятора")
-        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1, step=1)
+        P_dl = st.number_input("Суммарное сопротивление присоединительных воздуховодов, Па", value=1.00, step=0.01)
         h_l_N = st.number_input("Высота лифтовой шахты между уровнями нижнего и верхнего этажей, м", value=10.00, step=0.01)
         h_l_0 = st.number_input("Разность между уровнями расположения приемного устройства наружного воздуха и оголовка лифтовой шахты, м", value=0.50, step=0.01)
 
     # Ввод параметров (-1)-го-(-N)-го этажей
-    st.subheader("4. Параметры (-1)-го-(-N)-го этажей")
+    st.subheader("5. Параметры (-1)-го-(-N)-го этажей")
     N = st.number_input("Количество этажей", value=5, step=1)
-    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа, м", value=-12.5, step=0.1)
-    h_dl_minus_N = st.number_input("Высота дверей лифтовой шахты на уровне нижнего подземного этажа, м", value=2.00, step=0.1)    
+    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа, м", value=-12.50, step=0.01)
+    h_dl_minus_N = st.number_input("Высота дверей лифтовой шахты на уровне нижнего подземного этажа, м", value=2.00, step=0.01)    
     
     # Создаем редактируемую таблицу
     floors_df = pd.DataFrame({
-        'h': [-2.5] * N,
-        'S_dl': [0] * N,
-        'n': [1.0] * N,
-        'b_dl': [1.0] * N,
-        'h_dl': [2.0] * N,
-        'S_dr': [0] * N,
-        'm': [1.0] * N,
-        'b_dr': [1.0] * N,
-        'h_dr': [2.0] * N,
+        'h': [-2.50, -5.00, -7.50, -10.00, -12.50],
+        'S_dl': [0.00] * N,
+        'n': [1] * N,
+        'b_dl': [1.00] * N,
+        'h_dl': [2.00] * N,
+        'S_dr': [0.00] * N,
+        'm': [1] * N,
+        'b_dr': [1.00] * N,
+        'h_dr': [2.00] * N,
     }, index=[f'Этаж -{i}' for i in range(1, N+1)])
 
     columns = {
         'h': st.column_config.NumberColumn("h, м", format="%.2f"),
-        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.0f"),
+        'S_dl': st.column_config.NumberColumn("S_dl, м³/кг", format="%.2f"),
         'n': st.column_config.NumberColumn("n", format="%.0f"),
         'b_dl': st.column_config.NumberColumn("b_dl, м", format="%.2f"),
         'h_dl': st.column_config.NumberColumn("h_dl, м", format="%.2f"),
-        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.0f"),
+        'S_dr': st.column_config.NumberColumn("S_dr, м³/кг", format="%.2f"),
         'm': st.column_config.NumberColumn("m", format="%.0f"),
         'b_dr': st.column_config.NumberColumn("b_dr, м", format="%.2f"),
         'h_dr': st.column_config.NumberColumn("h_dr, м", format="%.2f")
@@ -5259,8 +5236,7 @@ if scenario == 13:
                     mass_flow_df['Массовый расход, кг/с'],
                     marker='o',
                     color='blue',
-                    linestyle='-',
-                    label='Профиль массового расхода'
+                    linestyle='-'
                 )
     
                 # Оформляем график
@@ -5296,15 +5272,15 @@ if scenario == 14:
 
     # Ввод параметров помещения
     st.subheader("1. Параметры воздуха")
-    t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
-    t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+    t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
+    t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
     # Ввод параметров тамбур-шлюза
     st.subheader("2. Параметры тамбур-шлюза")
     R = st.number_input("Расположение (0 - надземное, 1 - подземное)", value=0, step=1)
-    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
-    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.0, step=0.1)
-    nu_r_i_minus_i = st.number_input("Минимально допустимая скорость истечения воздуха через одну открытую дверь тамбур-шлюза на уровне i(-i) этажа, м/с", value=1.3, step=0.1)
+    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
+    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.00, step=0.01)
+    nu_r_i_minus_i = st.number_input("Минимально допустимая скорость истечения воздуха через одну открытую дверь тамбур-шлюза на уровне i(-i) этажа, м/с", value=1.30, step=0.01)
     b_dr_i_minus_i = st.number_input("Ширина двери тамбур-шлюза на уровне i(-i) этажа, м", value=1.00, step=0.01)
     h_dr_i_minus_i = st.number_input("Высота двери тамбур-шлюза на уровне i(-i) этажа, м", value=2.00, step=0.01)
 
@@ -5381,14 +5357,15 @@ if scenario == 14:
                     disabled=True,
                     format="%.2f"
                 )
-                # Вывод параметров вентилятора
-                st.subheader("3. Параметры вентилятора")
-                st.number_input(
-                    label="Подача вентилятора, м³/ч",
-                    value=formatted_results.get('L_v', 0.0),
-                    disabled=True,
-                    format="%.2f"
-                )
+
+            # Вывод параметров вентилятора
+            st.subheader("3. Параметры вентилятора")
+            st.number_input(
+                label="Подача вентилятора, м³/ч",
+                value=formatted_results.get('L_v', 0.0),
+                disabled=True,
+                format="%.2f"
+            )
             
         except Exception as e:
             st.error(f"Произошла ошибка при расчете: {e}")
@@ -5404,15 +5381,15 @@ if scenario == 15:
     
     # Ввод параметров помещения
     st.subheader("1. Параметры воздуха")
-    t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
-    t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+    t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
+    t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
     # Ввод параметров тамбур-шлюза
     st.subheader("2. Параметры тамбур-шлюза")
     R = st.number_input("Расположение (0 - надземное, 1 - подземное)", value=0, step=1)
-    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
-    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.0, step=0.1)
-    S_dr_i_minus_i = st.number_input("Характеристика удельного сопротивления воздухопроницанию дверей тамбур-шлюза на уровне i(-i)-го этажа (0 - нет данных), м³/кг", value=0, step=1)
+    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
+    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.00, step=0.01)
+    S_dr_i_minus_i = st.number_input("Характеристика удельного сопротивления воздухопроницанию дверей тамбур-шлюза на уровне i(-i)-го этажа (0 - нет данных), м³/кг", value=0.00, step=0.01)
     n_i_minus_i = st.number_input("Количество дверей тамбур-шлюза на уровне i(-i)-го этажа", value=1, step=1)
     b_dr_i_minus_i = st.number_input("Ширина двери тамбур-шлюза на уровне i(-i) этажа, м", value=1.00, step=0.01)
     h_dr_i_minus_i = st.number_input("Высота двери тамбур-шлюза на уровне i(-i) этажа, м", value=2.00, step=0.01)
@@ -5498,14 +5475,14 @@ if scenario == 15:
                     disabled=True,
                     format="%.2f"
                 )
-                # Вывод параметров вентилятора
-                st.subheader("3. Параметры вентилятора")
-                st.number_input(
-                    label="Подача вентилятора, м³/ч",
-                    value=formatted_results.get('L_v', 0.0),
-                    disabled=True,
-                    format="%.2f"
-                )
+            # Вывод параметров вентилятора
+            st.subheader("3. Параметры вентилятора")
+            st.number_input(
+                label="Подача вентилятора, м³/ч",
+                value=formatted_results.get('L_v', 0.0),
+                disabled=True,
+                format="%.2f"
+            )
             
         except Exception as e:
             st.error(f"Произошла ошибка при расчете: {e}")
@@ -5515,16 +5492,16 @@ if scenario == 15:
 
 #############################################################################################################################################################################################################################################
 if scenario == 16:
-    st.info("Выбран сценарий 15: приточная противодымная вентиляция в виде воздушных завес, отделяющих помещения хранения автомобилей от изолированных рамп закрытых надземных и подземных автостоянок.")
+    st.info("Выбран сценарий 16: приточная противодымная вентиляция в виде воздушных завес, отделяющих помещения хранения автомобилей от изолированных рамп закрытых надземных и подземных автостоянок.")
     
     # Ввод параметров помещения
     st.subheader("1. Параметры воздуха")
-    t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
+    t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
 
     # Ввод параметров воздушной завесы
     st.subheader("2. Параметры воздушной завесы")
-    nu_a = st.number_input("Скорость истечения воздуха из соплового аппарата, м/с", value=10.0, step=0.1)
-    b = st.number_input("Длина сопла в горизонтальной проекции, м", value=2.5, step=0.1)
+    nu_a = st.number_input("Скорость истечения воздуха из соплового аппарата, м/с", value=10.00, step=0.01)
+    b = st.number_input("Длина сопла в горизонтальной проекции, м", value=2.50, step=0.01)
     delta = st.number_input("Ширина сопла в горизонтальной проекции, м", value=0.03, step=0.01)
 
     # Собираем все входные данные
@@ -5575,14 +5552,14 @@ if scenario == 16:
                     disabled=True,
                     format="%.2f"
                 )
-                # Вывод параметров вентилятора
-                st.subheader("3. Параметры вентилятора")
-                st.number_input(
-                    label="Подача вентилятора, м³/ч",
-                    value=formatted_results.get('L_v', 0.0),
-                    disabled=True,
-                    format="%.2f"
-                )
+            # Вывод параметров вентилятора
+            st.subheader("3. Параметры вентилятора")
+            st.number_input(
+                label="Подача вентилятора, м³/ч",
+                value=formatted_results.get('L_v', 0.0),
+                disabled=True,
+                format="%.2f"
+            )
             
         except Exception as e:
             st.error(f"Произошла ошибка при расчете: {e}")
@@ -5596,19 +5573,19 @@ if scenario == 17:
     
     # Ввод параметров помещения
     st.subheader("1. Параметры воздуха")
-    t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
-    t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+    t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
+    t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
     # Ввод параметров тамбур-шлюза
     st.subheader("2. Параметры тамбур-шлюза")
     R = st.number_input("Расположение (0 - надземное, 1 - подземное)", value=0, step=1)
-    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
-    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.0, step=0.1)
-    S_dr_i_minus_i = st.number_input("Характеристика удельного сопротивления воздухопроницанию дверей тамбур-шлюза на уровне i(-i)-го этажа (0 - нет данных), м³/кг", value=0, step=1)
+    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
+    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.00, step=0.01)
+    S_dr_i_minus_i = st.number_input("Характеристика удельного сопротивления воздухопроницанию дверей тамбур-шлюза на уровне i(-i)-го этажа (0 - нет данных), м³/кг", value=0.00, step=0.01)
     n_i_minus_i = st.number_input("Количество дверей тамбур-шлюза на уровне i(-i)-го этажа", value=1, step=1)
     b_dr_i_minus_i = st.number_input("Ширина двери тамбур-шлюза на уровне i(-i) этажа, м", value=1.00, step=0.01)
     h_dr_i_minus_i = st.number_input("Высота двери тамбур-шлюза на уровне i(-i) этажа, м", value=2.00, step=0.01)
-    S_dl_i_minus_i = st.number_input("Характеристика удельного сопротивления воздухопроницанию дверей лифтовой шахты на уровне i-го (минус i-го) (0 - нет данных), м³/кг", value=0, step=1)
+    S_dl_i_minus_i = st.number_input("Характеристика удельного сопротивления воздухопроницанию дверей лифтовой шахты на уровне i-го (минус i-го) (0 - нет данных), м³/кг", value=0.00, step=0.01)
     m_i_minus_i = st.number_input("Количество дверей лифтовой шахты на уровне i(-i)-го этажа", value=1, step=1)
     b_dl_i_minus_i = st.number_input("Ширина двери лифтовой шахты на уровне i(-i) этажа, м", value=1.00, step=0.01)
     h_dl_i_minus_i = st.number_input("Высота двери лифтовой шахты на уровне i(-i) этажа, м", value=2.00, step=0.01)    
@@ -5709,14 +5686,14 @@ if scenario == 17:
                     disabled=True,
                     format="%.2f"
                 )
-                # Вывод параметров вентилятора
-                st.subheader("3. Параметры вентилятора")
-                st.number_input(
-                    label="Подача вентилятора, м³/ч",
-                    value=formatted_results.get('L_v', 0.0),
-                    disabled=True,
-                    format="%.2f"
-                )
+            # Вывод параметров вентилятора
+            st.subheader("3. Параметры вентилятора")
+            st.number_input(
+                label="Подача вентилятора, м³/ч",
+                value=formatted_results.get('L_v', 0.0),
+                disabled=True,
+                format="%.2f"
+            )
             
         except Exception as e:
             st.error(f"Произошла ошибка при расчете: {e}")
@@ -5730,15 +5707,15 @@ if scenario == 18:
 
     # Ввод параметров помещения
     st.subheader("1. Параметры воздуха")
-    t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
-    t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
+    t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
+    t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
 
     # Ввод параметров помещения зоны безопасности
     st.subheader("2. Параметры помещения зоны безопасности")
     R = st.number_input("Расположение (0 - надземное, 1 - подземное)", value=0, step=1)
-    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
-    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.0, step=0.1)
-    nu_sf_i_minus_i = st.number_input("Минимально допустимая скорость истечения воздуха через одну открытую дверь помещения зоны безопасности на уровне i(-i) этажа, м/с", value=1.5, step=0.1)
+    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
+    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.00, step=0.01)
+    nu_sf_i_minus_i = st.number_input("Минимально допустимая скорость истечения воздуха через одну открытую дверь помещения зоны безопасности на уровне i(-i) этажа, м/с", value=1.50, step=0.01)
     b_dsf_i_minus_i = st.number_input("Ширина двери помещения зоны безопасности на уровне i(-i) этажа, м", value=1.00, step=0.01)
     h_dsf_i_minus_i = st.number_input("Высота двери помещения зоны безопасности на уровне i(-i) этажа, м", value=2.00, step=0.01)
 
@@ -5815,14 +5792,14 @@ if scenario == 18:
                     disabled=True,
                     format="%.2f"
                 )
-                # Вывод параметров вентилятора
-                st.subheader("3. Параметры вентилятора")
-                st.number_input(
-                    label="Подача вентилятора, м³/ч",
-                    value=formatted_results.get('L_v', 0.0),
-                    disabled=True,
-                    format="%.2f"
-                )
+            # Вывод параметров вентилятора
+            st.subheader("3. Параметры вентилятора")
+            st.number_input(
+                label="Подача вентилятора, м³/ч",
+                value=formatted_results.get('L_v', 0.0),
+                disabled=True,
+                format="%.2f"
+            )
             
         except Exception as e:
             st.error(f"Произошла ошибка при расчете: {e}")
@@ -5836,16 +5813,16 @@ if scenario == 19:
     
     # Ввод параметров воздуха
     st.subheader("1. Параметры воздуха")
-    t_a = st.number_input("Температура наружного воздуха, °C", value=-58, step=1)
-    t_r = st.number_input("Температура воздуха в помещении, °C", value=0, step=1)
-    t_sf = st.number_input("Температура подогреваемого воздуха, °C", value=18, step=1)    
+    t_a = st.number_input("Температура наружного воздуха, °C", value=-58.00, step=0.01)
+    t_r = st.number_input("Температура воздуха в помещении, °C", value=0.00, step=0.01)
+    t_sf = st.number_input("Температура подогреваемого воздуха, °C", value=18.00, step=0.01)    
 
     # Ввод параметров тамбур-шлюза
     st.subheader("2. Параметры помещения зоны безопасности")
     R = st.number_input("Расположение (0 - надземное, 1 - подземное)", value=0, step=1)
-    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.5, step=0.1)
-    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.0, step=0.1)
-    S_dsf_i_minus_i = st.number_input("Характеристика удельного сопротивления воздухопроницанию дверей помещения зоны безопасности на уровне i(-i)-го этажа (0 - нет данных), м³/кг", value=0, step=1)
+    h_i_minus_i = st.number_input("Уровень отметки пола i(-i)-го этажа относительно уровня отметки пола 1-го этажа, м", value=2.50, step=0.01)
+    h_minus_N = st.number_input("Уровень отметки пола нижнего подземного этажа относительно уровня отметки пола 1-го этажа (0 - при надземном расположении), м", value=0.00, step=0.01)
+    S_dsf_i_minus_i = st.number_input("Характеристика удельного сопротивления воздухопроницанию дверей помещения зоны безопасности на уровне i(-i)-го этажа (0 - нет данных), м³/кг", value=0.00, step=0.01)
     n_i_minus_i = st.number_input("Количество дверей помещения зоны безопасности на уровне i(-i)-го этажа", value=1, step=1)
     b_dsf_i_minus_i = st.number_input("Ширина двери помещения зоны безопасности на уровне i(-i) этажа, м", value=1.00, step=0.01)
     h_dsf_i_minus_i = st.number_input("Высота двери помещения зоны безопасности на уровне i(-i) этажа, м", value=2.00, step=0.01)
@@ -5955,14 +5932,14 @@ if scenario == 19:
                     disabled=True,
                     format="%.2f"
                 )
-                # Вывод параметров вентилятора
-                st.subheader("3. Параметры вентилятора")
-                st.number_input(
-                    label="Подача вентилятора, м³/ч",
-                    value=formatted_results.get('L_v', 0.0),
-                    disabled=True,
-                    format="%.2f"
-                )
+            # Вывод параметров вентилятора
+            st.subheader("3. Параметры вентилятора")
+            st.number_input(
+                label="Подача вентилятора, м³/ч",
+                value=formatted_results.get('L_v', 0.0),
+                disabled=True,
+                format="%.2f"
+            )
             
         except Exception as e:
             st.error(f"Произошла ошибка при расчете: {e}")
